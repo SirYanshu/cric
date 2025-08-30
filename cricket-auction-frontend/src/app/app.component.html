@@ -1,0 +1,41 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="'navigation'" [mode]="'over'">
+    <mat-toolbar>Cricket Auction</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </a>
+      <a mat-list-item routerLink="/teams" routerLinkActive="active">
+        <mat-icon>groups</mat-icon>
+        <span>Teams</span>
+      </a>
+      <a mat-list-item routerLink="/players" routerLinkActive="active">
+        <mat-icon>person</mat-icon>
+        <span>Players</span>
+      </a>
+      <a mat-list-item routerLink="/matches" routerLinkActive="active">
+        <mat-icon>sports_cricket</mat-icon>
+        <span>Matches</span>
+      </a>
+      <a mat-list-item routerLink="/auctions" routerLinkActive="active">
+        <mat-icon>gavel</mat-icon>
+        <span>Auctions</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Cricket Auction Game</span>
+      <span class="spacer"></span>
+    </mat-toolbar>
+    
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

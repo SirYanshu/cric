@@ -1,0 +1,120 @@
+.players-container {
+    padding: 20px;
+  
+    h1 {
+      margin: 0;
+      color: #333;
+    }
+  
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  
+    .players-table {
+      width: 100%;
+    }
+  
+    .player-row {
+      transition: background-color 0.2s;
+  
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+  
+    .player-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+  
+      .player-name {
+        font-weight: 500;
+      }
+  
+      .type-chip {
+        font-size: 0.7rem;
+        height: 20px;
+  
+        &.type-batsman {
+          background-color: #e8f5e8;
+          color: #2e7d32;
+        }
+        &.type-bowler {
+          background-color: #e3f2fd;
+          color: #1976d2;
+        }
+        &.type-all_rounder {
+          background-color: #fff3e0;
+          color: #f57c00;
+        }
+        &.type-wicket_keeper {
+          background-color: #fce4ec;
+          color: #c2185b;
+        }
+        &.type-wicket_keeper_batsman {
+          background-color: #f3e5f5;
+          color: #7b1fa2;
+        }
+      }
+    }
+  
+    .skill-display {
+      width: 120px;
+  
+      .skill-value {
+        font-weight: 500;
+        margin-right: 8px;
+      }
+  
+      .skill-bar {
+        height: 4px;
+      }
+    }
+  
+    .skills-summary {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+  
+      .skill-badge {
+        background-color: #f5f5f5;
+        padding: 2px 6px;
+        border-radius: 12px;
+        font-size: 0.7rem;
+        color: #666;
+      }
+    }
+  
+    .team-chip {
+      background-color: #1976d2;
+      color: white;
+    }
+  
+    .no-team {
+      color: #4caf50;
+      font-style: italic;
+    }
+  
+    .price-info {
+      font-family: monospace;
+  
+      .sold-price {
+        color: #2e7d32;
+        font-weight: 500;
+      }
+  
+      .base-price {
+        color: #666;
+      }
+    }
+  
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+    }
+  }
+  

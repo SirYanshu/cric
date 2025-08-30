@@ -1,0 +1,30 @@
+// File: src/styles.scss
+/* You can add global styles to this file, and also import other style files */
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+/* Basic styles for the application */
+.mat-mdc-card {
+  margin-bottom: 16px;
+}
+
+.mat-mdc-button-base {
+  margin: 0 4px;
+}
+
+/* You can add Material theming here if needed */
+// $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+// $my-theme: mat.define-light-theme((
+//   color: (
+//     primary: $my-primary,
+//     accent: $my-accent,
+//   )
+// ));
+
+// @include mat.all-component-themes($my-theme);

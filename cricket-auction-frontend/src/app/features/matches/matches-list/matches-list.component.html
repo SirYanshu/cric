@@ -1,0 +1,94 @@
+<div class="matches-container">
+    <div class="header">
+      <h1>Matches</h1>
+      <button mat-raised-button color="primary" (click)="createMatch()">
+        <mat-icon>add</mat-icon>
+        Create Match
+      </button>
+    </div>
+  
+    <mat-card>
+      <mat-card-content>
+        <table mat-table [dataSource]="dataSource" matSort class="matches-table">
+  
+          <!-- Teams Column -->
+          <ng-container matColumnDef="teams">
+            <th mat-header-cell *matHeaderCellDef>Teams</th>
+            <td mat-cell *matCellDef="let match">
+              <div class="teams-info">
+                <span class="team-name">{{match.team1_name}}</span>
+                <mat-icon class="vs-icon">sports_cricket</mat-icon>
+                <span class="team-name">{{match.team2_name}}</span>
+              </div>
+            </td>
+          </ng-container>
+  
+          <!-- Score Column -->
+          <ng-container matColumnDef="score">
+            <th mat-header-cell *matHeaderCellDef>Score</th>
+            <td mat-cell *matCellDef="let match">
+              <div class="score-info" *ngIf="match.status === 'COMPLETED'; else noScore">
+                <div class="team-score">{{match.team1_score}}/{{match.team1_wickets}}</div>
+                <div class="team-score">{{match.team2_score}}/{{match.team2_wickets}}</div>
+              </div>
+              <ng-template #noScore>
+                <span class="no-score">-</span>
+              </ng-template>
+            </td>
+          </ng-container>
+  
+          <!-- Winner Column -->
+          <ng-container matColumnDef="winner">
+            <th mat-header-cell *matHeaderCellDef>Winner</th>
+            <td mat-cell *matCellDef="let match">
+              <mat-chip *ngIf="match.winner_name" class="winner-chip">
+                {{match.winner_name}}
+              </mat-chip>
+              <span *ngIf="!match.winner_name" class="no-winner">TBD</span>
+            </td>
+          </ng-container>
+  
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+            <td mat-cell *matCellDef="let match">
+              <mat-chip [ngClass]="'status-' + match.status.toLowerCase()">
+                {{getStatusLabel(match.status)}}
+              </mat-chip>
+            </td>
+          </ng-container>
+  
+          <!-- Created Column -->
+          <ng-container matColumnDef="created_at">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
+            <td mat-cell *matCellDef="let match">{{match.created_at | date:'short'}}</td>
+          </ng-container>
+  
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let match">
+              <button mat-icon-button 
+                      (click)="simulateMatch(match)" 
+                      matTooltip="Simulate Match"
+                      *ngIf="match.status === 'SCHEDULED'"
+                      [disabled]="simulatingMatches.has(match.id)">
+                <mat-icon>play_arrow</mat-icon>
+              </button>
+              <mat-spinner *ngIf="simulatingMatches.has(match.id)" diameter="24"></mat-spinner>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="match-row"></tr>
+        </table>
+  
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  
+    <div *ngIf="loading" class="loading-container">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+  

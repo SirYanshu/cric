@@ -1,0 +1,77 @@
+<div class="players-container">
+    <div class="header">
+      <h1>Players</h1>
+      <button mat-raised-button color="primary" disabled>
+        <mat-icon>add</mat-icon>
+        Add Player (Coming Soon)
+      </button>
+    </div>
+  
+    <mat-card>
+      <mat-card-content>
+        <table mat-table [dataSource]="dataSource" matSort class="players-table">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Player Name</th>
+            <td mat-cell *matCellDef="let player">
+              <div class="player-info">
+                <span class="player-name">{{player.name}}</span>
+                <mat-chip class="type-chip" [ngClass]="'type-' + player.player_type.toLowerCase()">
+                  {{getPlayerTypeLabel(player.player_type)}}
+                </mat-chip>
+              </div>
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="overall_skill">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Overall Skill</th>
+            <td mat-cell *matCellDef="let player">
+              <div class="skill-display">
+                <span class="skill-value">{{player.overall_skill}}</span>
+                <mat-progress-bar mode="determinate" [value]="player.overall_skill" class="skill-bar"></mat-progress-bar>
+              </div>
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="skills">
+            <th mat-header-cell *matHeaderCellDef>Skills</th>
+            <td mat-cell *matCellDef="let player">
+              <div class="skills-summary">
+                <span class="skill-badge">BAT: {{player.batting}}</span>
+                <span class="skill-badge" *ngIf="player.bowling">BOW: {{player.bowling}}</span>
+                <span class="skill-badge">FLD: {{player.fielding}}</span>
+                <span class="skill-badge" *ngIf="player.wicketkeeping">WK: {{player.wicketkeeping}}</span>
+              </div>
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="team">
+            <th mat-header-cell *matHeaderCellDef>Team</th>
+            <td mat-cell *matCellDef="let player">
+              <mat-chip *ngIf="player.team_name" class="team-chip">{{player.team_name}}</mat-chip>
+              <span *ngIf="!player.team_name" class="no-team">Available</span>
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef>Price</th>
+            <td mat-cell *matCellDef="let player">
+              <div class="price-info">
+                <span class="sold-price" *ngIf="player.sold_price">\${{formatCurrency(player.sold_price)}}</span>
+                <span class="base-price" *ngIf="!player.sold_price">Base: \${{formatCurrency(player.base_price)}}</span>
+              </div>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="player-row"></tr>
+        </table>
+  
+        <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  
+    <div *ngIf="loading" class="loading-container">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+  

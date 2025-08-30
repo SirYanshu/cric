@@ -1,0 +1,81 @@
+<div class="team-players">
+    <div *ngIf="players && players.length > 0; else noPlayers">
+      <table mat-table [dataSource]="dataSource" class="players-table">
+        
+        <!-- Player Name -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Player Name</th>
+          <td mat-cell *matCellDef="let player">
+            <div class="player-info">
+              <span class="player-name">{{ player.name }}</span>
+              <mat-chip class="type-chip" [ngClass]="'type-' + player.player_type?.toLowerCase()">
+                {{ getPlayerTypeLabel(player.player_type) }}
+              </mat-chip>
+            </div>
+          </td>
+        </ng-container>
+  
+        <!-- Skills -->
+        <ng-container matColumnDef="skills">
+          <th mat-header-cell *matHeaderCellDef>Skills</th>
+          <td mat-cell *matCellDef="let player">
+            <div class="skills-info">
+              <div class="skill-item">
+                <span class="skill-label">Overall:</span>
+                <span class="skill-value">{{ player.overall_skill || 0 }}</span>
+                <mat-progress-bar mode="determinate" [value]="player.overall_skill || 0"></mat-progress-bar>
+              </div>
+              <div class="secondary-skills">
+                <span class="skill-badge">BAT: {{ player.batting || 0 }}</span>
+                <span class="skill-badge" *ngIf="player.bowling">BOW: {{ player.bowling }}</span>
+                <span class="skill-badge">FLD: {{ player.fielding || 0 }}</span>
+                <span class="skill-badge" *ngIf="player.wicketkeeping">WK: {{ player.wicketkeeping }}</span>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+  
+        <!-- Price -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Price</th>
+          <td mat-cell *matCellDef="let player">
+            <div class="price-info">
+              <span class="sold-price" *ngIf="player.sold_price">
+                ${{ formatCurrency(player.sold_price) }}
+              </span>
+              <span class="base-price" *ngIf="!player.sold_price && player.base_price">
+                Base: ${{ formatCurrency(player.base_price) }}
+              </span>
+            </div>
+          </td>
+        </ng-container>
+  
+        <!-- Playing XI -->
+        <ng-container matColumnDef="first_eleven">
+          <th mat-header-cell *matHeaderCellDef>Playing XI</th>
+          <td mat-cell *matCellDef="let player">
+            <mat-chip [ngClass]="player.first_eleven ? 'in-eleven' : 'not-in-eleven'">
+              {{ player.first_eleven ? 'Yes' : 'No' }}
+            </mat-chip>
+          </td>
+        </ng-container>
+  
+        <!-- Table Rows -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  
+    <!-- No Players Template -->
+    <ng-template #noPlayers>
+      <div class="no-players">
+        <mat-icon>person_off</mat-icon>
+        <p>{{ isPlayingEleven ? 'No players selected for playing XI' : 'No players in this team' }}</p>
+        <button mat-raised-button color="primary" routerLink="/auctions" *ngIf="!isPlayingEleven">
+          <mat-icon>gavel</mat-icon>
+          Go to Auctions
+        </button>
+      </div>
+    </ng-template>
+  </div>
+  
