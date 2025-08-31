@@ -1,156 +1,39 @@
-// Global styles for the app component
-.app-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Roboto', Arial, sans-serif;
-  }
-  
-  // Header styles
-  .app-header {
-    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+.app-header {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+
+  a {
     color: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-  
-  .navbar {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 64px;
-  }
-  
-  .nav-brand {
-    h1 {
-      margin: 0;
-      font-size: 1.5rem;
-      font-weight: 500;
+    font-weight: 500;
+    text-decoration: none;
+
+    &.active {
+      border-bottom: 2px solid white;
     }
   }
-  
+}
+
+/* Hide mobile menu button on desktop */
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 768px) {
   .nav-links {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 2rem;
-  
-    li {
-      margin: 0;
-    }
-  
-    a {
-      color: white;
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      transition: background-color 0.3s ease;
-      font-weight: 400;
-  
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-  
-      &.active {
-        background-color: rgba(255, 255, 255, 0.2);
-        font-weight: 500;
-      }
-    }
-  }
-  
-  // Main content
-  .main-content {
-    flex: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-    padding: 20px;
-    min-height: calc(100vh - 120px);
-  }
-  
-  // Footer
-  .app-footer {
-    background-color: #f5f5f5;
-    color: #666;
-    text-align: center;
-    padding: 20px;
-    margin-top: auto;
-    border-top: 1px solid #e0e0e0;
-  
-    p {
-      margin: 0;
-      font-size: 0.9rem;
-    }
-  }
-  
-  // Responsive design
-  @media (max-width: 768px) {
-    .navbar {
-      flex-direction: column;
-      height: auto;
-      padding: 15px 20px;
-    }
-  
-    .nav-links {
-      gap: 1rem;
-      margin-top: 15px;
-    }
-  
-    .main-content {
-      padding: 15px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .nav-links {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem;
-  
-      a {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.9rem;
-      }
-    }
-  
-    .nav-brand h1 {
-      font-size: 1.3rem;
-    }
+    display: none; // hide top nav
   }
 
-
-// // 
-
-//   .sidenav-container {
-//     height: 100%;
-//   }
-  
-//   .sidenav {
-//     width: 250px;
-//   }
-  
-//   .content {
-//     padding: 20px;
-//     height: calc(100vh - 64px);
-//     overflow-y: auto;
-//   }
-  
-//   .spacer {
-//     flex: 1 1 auto;
-//   }
-  
-//   .active {
-//     background-color: rgba(0, 0, 0, 0.04);
-//   }
-  
-//   mat-nav-list a {
-//     display: flex;
-//     align-items: center;
-//     gap: 12px;
-//   }
+  .mobile-menu {
+    display: inline-flex; // show hamburger only on mobile
+  }
+}

@@ -1,6 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="'navigation'" [mode]="'over'">
-    <mat-toolbar>Cricket Auction</mat-toolbar>
+  <!-- You can keep the sidenav if you want it only for mobile -->
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [mode]="'over'">
     <mat-nav-list>
       <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
         <mat-icon>dashboard</mat-icon>
@@ -24,16 +24,28 @@
       </a>
     </mat-nav-list>
   </mat-sidenav>
-  
+
+  <!-- Main content -->
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>Cricket Auction Game</span>
+    <mat-toolbar color="primary" class="app-header">
+      <span class="nav-brand">Cricket Auction</span>
+
+      <!-- Top nav links -->
       <span class="spacer"></span>
+      <nav class="nav-links">
+        <a mat-button routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a mat-button routerLink="/teams" routerLinkActive="active">Teams</a>
+        <a mat-button routerLink="/players" routerLinkActive="active">Players</a>
+        <a mat-button routerLink="/matches" routerLinkActive="active">Matches</a>
+        <a mat-button routerLink="/auctions" routerLinkActive="active">Auctions</a>
+      </nav>
+
+      <!-- Mobile menu button -->
+      <button mat-icon-button class="mobile-menu" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
     </mat-toolbar>
-    
+
     <div class="content">
       <router-outlet></router-outlet>
     </div>
