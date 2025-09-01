@@ -1,43 +1,67 @@
 <mat-sidenav-container class="sidenav-container">
-  <!-- You can keep the sidenav if you want it only for mobile -->
   <mat-sidenav #drawer class="sidenav" fixedInViewport [mode]="'over'">
     <mat-nav-list>
       <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
         <mat-icon>dashboard</mat-icon>
         <span>Dashboard</span>
       </a>
+      
+      <!-- Career Section -->
+      <mat-divider></mat-divider>
+      <h3 matSubheader>Career</h3>
+      <a mat-list-item routerLink="/profile/me" routerLinkActive="active">
+        <mat-icon>person</mat-icon>
+        <span>My Profile</span>
+      </a>
+      <a mat-list-item routerLink="/tournaments" routerLinkActive="active">
+        <mat-icon>emoji_events</mat-icon>
+        <span>Tournaments</span>
+      </a>
+      <a mat-list-item routerLink="/leaderboard" routerLinkActive="active">
+        <mat-icon>leaderboard</mat-icon>
+        <span>Leaderboard</span>
+      </a>
+      
+      <!-- Team Management -->
+      <mat-divider></mat-divider>
+      <h3 matSubheader>Team Management</h3>
       <a mat-list-item routerLink="/teams" routerLinkActive="active">
         <mat-icon>groups</mat-icon>
-        <span>Teams</span>
+        <span>My Teams</span>
       </a>
       <a mat-list-item routerLink="/players" routerLinkActive="active">
-        <mat-icon>person</mat-icon>
-        <span>Players</span>
-      </a>
-      <a mat-list-item routerLink="/matches" routerLinkActive="active">
         <mat-icon>sports_cricket</mat-icon>
-        <span>Matches</span>
+        <span>Players</span>
       </a>
       <a mat-list-item routerLink="/auctions" routerLinkActive="active">
         <mat-icon>gavel</mat-icon>
         <span>Auctions</span>
       </a>
+      
+      <!-- Matches -->
+      <mat-divider></mat-divider>
+      <h3 matSubheader>Matches</h3>
+      <a mat-list-item routerLink="/matches" routerLinkActive="active">
+        <mat-icon>sports_baseball</mat-icon>
+        <span>All Matches</span>
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 
-  <!-- Main content -->
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="app-header">
-      <span class="nav-brand">Cricket Auction</span>
+      <span class="nav-brand">Cricket Career Manager</span>
+
+      <span class="spacer"></span>
 
       <!-- Top nav links -->
-      <span class="spacer"></span>
       <nav class="nav-links">
         <a mat-button routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a mat-button routerLink="/tournaments" routerLinkActive="active">Tournaments</a>
+        <a mat-button routerLink="/profile/me" routerLinkActive="active">Profile</a>
         <a mat-button routerLink="/teams" routerLinkActive="active">Teams</a>
-        <a mat-button routerLink="/players" routerLinkActive="active">Players</a>
         <a mat-button routerLink="/matches" routerLinkActive="active">Matches</a>
-        <a mat-button routerLink="/auctions" routerLinkActive="active">Auctions</a>
+        <a mat-button routerLink="/leaderboard" routerLinkActive="active">Leaderboard</a>
       </nav>
 
       <!-- Mobile menu button -->

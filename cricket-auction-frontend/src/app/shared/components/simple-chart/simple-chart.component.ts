@@ -1,10 +1,11 @@
 import { Component, Input, OnChanges, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { Chart, ChartConfiguration, registerables } from 'chart.js';
+import { Chart, ChartConfiguration, ChartType, registerables } from 'chart.js';
 
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-simple-chart',
+  standalone: true,
   template: `
     <div class="chart-container">
       <canvas #chartCanvas></canvas>
@@ -16,19 +17,17 @@ Chart.register(...registerables);
       height: 100%;
       width: 100%;
     }
-    
     canvas {
       max-height: 100%;
     }
   `]
 })
 export class SimpleChartComponent implements OnChanges, OnDestroy {
-  @Input() type: any = 'bar';
+  @Input() type: ChartType = 'bar';
   @Input() data: any;
   @Input() options: any = {};
   
   @ViewChild('chartCanvas', { static: true }) chartCanvas!: ElementRef<HTMLCanvasElement>;
-  
   private chart: Chart | undefined;
 
   ngOnChanges(): void {
@@ -47,16 +46,13 @@ export class SimpleChartComponent implements OnChanges, OnDestroy {
     if (!this.chartCanvas?.nativeElement || !this.data) {
       return;
     }
-
     if (this.chart) {
       this.chart.destroy();
     }
-
     const ctx = this.chartCanvas.nativeElement.getContext('2d');
     if (!ctx) {
       return;
     }
-
     this.chart = new Chart(ctx, {
       type: this.type,
       data: this.data,
